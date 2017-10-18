@@ -1,7 +1,5 @@
 # Glimmer Redux Rollup Plugin
 
-## Description
-
 Rollup plugin to customize the store, middleware, or enhancer for glimmer redux
 
 ## Installation
