@@ -13,14 +13,10 @@ var connectPath = nodePath + 'node_modules/glimmer-redux/src/connect.js:./';
 var glimmerRedux = basePath + 'reducers/index';
 var reducersPath = './src/reducers/index.js';
 
-var glimmerComponent = '@glimmer/component';
-var componentPath = 'node_modules/@glimmer/component/dist/modules/es2017/index.js';
-
 var index = (function () {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   var includedOverrides = {
-    [glimmerComponent]: componentPath,
     [glimmerRedux]: reducersPath
   }
 
