@@ -17,9 +17,9 @@ let app = new GlimmerApp(defaults, {
   rollup: {
     plugins: [
       glimmerRedux({
-        'store': './src/store.js',
-        'middleware': './src/middleware/index.js',
-        'enhancers': './src/enhancers/index.js'
+        'store': './src/store.ts',
+        'middleware': './src/middleware/index.ts',
+        'enhancers': './src/enhancers/index.ts'
       })
     ]
   }
