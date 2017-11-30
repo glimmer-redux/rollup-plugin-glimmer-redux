@@ -10,7 +10,7 @@ var TsConfiguration = new Configuration();
 var transpiled = [];
 var includedOverrides = {};
 var configureTypeScript = function(file, origin) {
-  if (file !== 'redux' && transpiled.length > 0) {
+  if (file.indexOf('./') > -1 && transpiled.length > 0) {
     var found = transpiled.filter((function(id) {
       return id === origin;
     }));

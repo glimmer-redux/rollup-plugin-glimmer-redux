@@ -1,4 +1,7 @@
 import connect from './src/connect';
+import { combineReducers } from 'redux';
+
+console.log(combineReducers);
 
 var x = 1;
 if (process.env.NODE_ENV !== 'production') {

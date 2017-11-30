@@ -7,6 +7,7 @@ const assert = require('assert');
 const helper = require('./helper');
 const { rollup } = require('rollup');
 const glimmerRedux = require('../src/index');
+const nodeResolve = require('rollup-plugin-node-resolve');
 
 helper.prepareSamples();
 
@@ -26,6 +27,7 @@ describe('rollup-plugin-glimmer-redux', function() {
     return rollup({
       input: 'samples/basic/main.js',
       plugins: [
+        nodeResolve(),
         glimmerRedux()
       ]
     }).then((bundle) => {

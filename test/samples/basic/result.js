@@ -28,6 +28,13 @@ var connect = {
   store
 };
 
+function combineReducers() {
+  var x = 'fake redux ...soo good!';
+  return x;
+}
+
+console.log(combineReducers);
+
 var x = 1;
 if (undefined !== 'production') {
   x = 2;
