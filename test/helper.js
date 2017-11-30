@@ -12,6 +12,7 @@ var prepareSamples = function() {
   fs.copySync(path.join('samples', 'src'), path.join('samples', 'nested', 'src'));
   fs.copySync(path.join('samples', 'src'), path.join('samples', 'store', 'src'));
   fs.copySync(path.join('samples', 'src'), path.join('samples', 'todos', 'src'));
+  fs.copySync(path.join('samples', 'src'), path.join('samples', 'sagas', 'src'));
 }
 
 var patchReducer = function(directory) {

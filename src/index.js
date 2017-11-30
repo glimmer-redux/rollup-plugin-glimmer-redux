@@ -17,7 +17,12 @@ var configureTypeScript = function(file, origin) {
     if (found.length > 0) {
       var tsFile = found[0];
       var tsMapping = tsFile + ':' + file;
-      var fileName = file.replace('./', '');
+      var fileName;
+      if (file.indexOf('../') === -1) {
+        var fileName = file.replace('./', '');
+      }else{
+        var fileName = file;
+      }
       var filePath = tsFile.replace(/(.*)[/](.*)\.ts/, '$1');
       var fileMapping = filePath + '/' + fileName + '.ts';
       includedOverrides[tsMapping] = fileMapping;
@@ -79,7 +84,7 @@ var index = (function () {
       return resolvePath(file, origin);
     },
     transform: function transform(code, id) {
-      if (/^\.\/src\/(reducers|middleware|enhancers)\/.+\.ts$/.test(id) || /^\.\/src\/store.ts$/.test(id)) {
+      if (/^\.\/src\/(.*)\/.+\.ts$/.test(id) || /^\.\/src\/store.ts$/.test(id)) {
         transpiled.push(id);
         var tsconfig = TsConfiguration.fetch();
         var transformed = typescript.transpileModule(code, tsconfig.config);

@@ -144,4 +144,23 @@ describe('rollup-plugin-glimmer-redux', function() {
     });
   });
 
+  it('sagas will be included when middleware imports them', function () {
+    helper.patchReducer('sagas');
+    helper.patchMiddleware('sagas');
+
+    return rollup({
+      input: 'samples/sagas/main.js',
+      plugins: [
+        glimmerRedux({
+          'middleware': './src/middleware/index.ts'
+        })
+      ]
+    }).then((bundle) => {
+      return bundle.generate({ format: 'es' });
+    }).then(({ code }) => {
+      let result = fs.readFileSync(path.join(__dirname, 'samples', 'sagas', 'result.js'), 'utf8');
+      assert.strictEqual(result, code);
+    });
+  });
+
 });
