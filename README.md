@@ -37,3 +37,19 @@ moduleConfiguration['collections']['middleware'] = {
   defaultType: 'middleware'
 };
 ```
+
+## Can I still use JavaScript?
+
+This plugin offers both TypeScript & JavaScript support. As of v1.0.0 the default is TypeScript but to use JavaScript reducers (for example) configure it like so ...
+
+```
+let app = new GlimmerApp(defaults, {
+  rollup: {
+    plugins: [
+      glimmerRedux({
+        'reducers': './src/reducers/index.js'
+      })
+    ]
+  }
+});
+```
