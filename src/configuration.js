@@ -3,18 +3,13 @@ var path = require('path');
 var typescript = require('typescript');
 
 var Configuration = function() {
-  this.options = undefined;
+
 };
 
 Configuration.prototype.fetch = function() {
-  if (this.options) {
-    return this.options;
-  }
   var tsconfig = this.findFile();
-  var configuration = this.adjust(tsconfig);
-  this.options = configuration;
-  return configuration;
-}
+  return this.adjust(tsconfig);
+};
 
 Configuration.prototype.findFile = function() {
   var cwd = process.cwd();

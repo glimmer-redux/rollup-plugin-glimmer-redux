@@ -5,8 +5,6 @@ var Configuration = require('./configuration');
 var typescript = require('typescript');
 var replace = require('rollup-plugin-replace');
 
-var TsConfiguration = new Configuration();
-
 var transpiled = [];
 var includedOverrides = {};
 var configureTypeScript = function(file, origin) {
@@ -51,6 +49,9 @@ function resolvePath(id, origin) {
 var index = (function () {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
+  var TsConfiguration = new Configuration();
+  var tsconfig = TsConfiguration.fetch();
+
   var PathResolver = new Resolver();
   var storePath = PathResolver.storePath();
   var connectPath = PathResolver.connectPath();
@@ -86,7 +87,6 @@ var index = (function () {
     transform: function transform(code, id) {
       if (/^\.\/src\/(.*)\/.+\.ts$/.test(id) || /^\.\/src\/store.ts$/.test(id)) {
         transpiled.push(id);
-        var tsconfig = TsConfiguration.fetch();
         var transformed = typescript.transpileModule(code, tsconfig.config);
         return {
           code: transformed.outputText,
