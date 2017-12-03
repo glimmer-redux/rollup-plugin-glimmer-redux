@@ -1,29 +1,23 @@
 'use strict';
 
+var Mapper = require('./mapper');
 var Resolver = require('./resolver');
 var Configuration = require('./configuration');
 var typescript = require('typescript');
 var replace = require('rollup-plugin-replace');
 
+var FileMapper = new Mapper();
+
 var transpiled = [];
 var includedOverrides = {};
-var configureTypeScript = function(file, origin) {
+function configureTypeScript(file, origin) {
   if (file.indexOf('./') > -1 && transpiled.length > 0) {
     var found = transpiled.filter((function(id) {
       return id === origin;
     }));
     if (found.length > 0) {
-      var tsFile = found[0];
-      var tsMapping = tsFile + ':' + file;
-      var fileName;
-      if (file.indexOf('../') === -1) {
-        var fileName = file.replace('./', '');
-      }else{
-        var fileName = file;
-      }
-      var filePath = tsFile.replace(/(.*)[/](.*)\.ts/, '$1');
-      var fileMapping = filePath + '/' + fileName + '.ts';
-      includedOverrides[tsMapping] = fileMapping;
+      var mapping = FileMapper.getFileMapping(file, found[0]);
+      includedOverrides[mapping.tsMapping] = mapping.fileMapping;
     }
   }
 }
