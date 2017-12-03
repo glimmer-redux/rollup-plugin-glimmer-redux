@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-glimmer-redux",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "rollup plugin for glimmer redux",
   "main": "src/index.js",
   "author": "Toran Billups toranb@gmail.com",
