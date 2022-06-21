@@ -34,7 +34,7 @@ describe('rollup-plugin-glimmer-redux', function() {
       return bundle.generate({ format: 'es' });
     }).then(({ code }) => {
       let result = fs.readFileSync(path.join(__dirname, 'samples', 'basic', 'result.js'), 'utf8');
-      assert.strictEqual(result, code);
+      assertEqualFiles(result, code)
     });
   });
 
@@ -50,7 +50,7 @@ describe('rollup-plugin-glimmer-redux', function() {
       return bundle.generate({ format: 'es' });
     }).then(({ code }) => {
       let result = fs.readFileSync(path.join(__dirname, 'samples', 'todos', 'result.js'), 'utf8');
-      assert.strictEqual(result, code);
+      assertEqualFiles(result, code);
     });
   });
 
@@ -66,7 +66,7 @@ describe('rollup-plugin-glimmer-redux', function() {
       return bundle.generate({ format: 'es' });
     }).then(({ code }) => {
       let result = fs.readFileSync(path.join(__dirname, 'samples', 'nested', 'result.js'), 'utf8');
-      assert.strictEqual(result, code);
+      assertEqualFiles(result, code);
     });
   });
 
@@ -85,7 +85,7 @@ describe('rollup-plugin-glimmer-redux', function() {
       return bundle.generate({ format: 'es' });
     }).then(({ code }) => {
       let result = fs.readFileSync(path.join(__dirname, 'samples', 'middleware', 'result.js'), 'utf8');
-      assert.strictEqual(result, code);
+      assertEqualFiles(result, code);
     });
   });
 
@@ -104,7 +104,7 @@ describe('rollup-plugin-glimmer-redux', function() {
       return bundle.generate({ format: 'es' });
     }).then(({ code }) => {
       let result = fs.readFileSync(path.join(__dirname, 'samples', 'enhancers', 'result.js'), 'utf8');
-      assert.strictEqual(result, code);
+      assertEqualFiles(result, code);
     });
   });
 
@@ -122,7 +122,7 @@ describe('rollup-plugin-glimmer-redux', function() {
       return bundle.generate({ format: 'es' });
     }).then(({ code }) => {
       let result = fs.readFileSync(path.join(__dirname, 'samples', 'store', 'result.js'), 'utf8');
-      assert.strictEqual(result, code);
+      assertEqualFiles(result, code);
     });
   });
 
@@ -140,7 +140,7 @@ describe('rollup-plugin-glimmer-redux', function() {
       return bundle.generate({ format: 'es' });
     }).then(({ code }) => {
       let result = fs.readFileSync(path.join(__dirname, 'samples', 'javascript', 'result.js'), 'utf8');
-      assert.strictEqual(result, code);
+      assertEqualFiles(result, code);
     });
   });
 
@@ -159,8 +159,20 @@ describe('rollup-plugin-glimmer-redux', function() {
       return bundle.generate({ format: 'es' });
     }).then(({ code }) => {
       let result = fs.readFileSync(path.join(__dirname, 'samples', 'sagas', 'result.js'), 'utf8');
-      assert.strictEqual(result, code);
+      assertEqualFiles(result, code);
     });
   });
 
 });
+
+
+function assertEqualFiles(expected, actual) {
+  expected = removeLineBreaks(expected)
+  actual = removeLineBreaks(actual)
+
+  assert.strictEqual(expected, actual);
+}
+
+function removeLineBreaks(str) {
+  return str.replace(/(\r\n|\n|\r)/gm, "")
+}
