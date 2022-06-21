@@ -50,6 +50,9 @@ var index = (function () {
   var storePath = PathResolver.storePath();
   var connectPath = PathResolver.connectPath();
 
+  storePath = toLinuxPath(storePath)
+  connectPath = toLinuxPath(connectPath)
+
   var defaultReducer = storePath + 'reducers/index';
   var reducersPath = './src/reducers/index.ts';
   includedOverrides[defaultReducer] = reducersPath;
@@ -75,6 +78,7 @@ var index = (function () {
 
   return {
     resolveId: function resolveId(file, origin) {
+      origin = toLinuxPath(origin)
       configureTypeScript(file, origin);
       return resolvePath(file, origin);
     },
@@ -93,5 +97,9 @@ var index = (function () {
     }
   };
 });
+
+function toLinuxPath(path) {
+  return path?.replace(/\\/g, '/')
+}
 
 module.exports = index;
